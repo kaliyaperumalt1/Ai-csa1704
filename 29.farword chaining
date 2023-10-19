@@ -1,0 +1,38 @@
+% Facts
+bird(tweety).
+bird(penguin).
+
+% Rules
+flies(X) :- bird(X), \+penguin(X).
+
+% Forward chaining
+forward_chain :-
+    flies(X),
+    write(X), write(' can fly.'),
+    nl,
+    fail. % to force backtracking for more results
+
+% Queries
+query1 :-
+    write('Is Tweety a bird? '), bird(tweety), write('Yes.'), nl.
+
+query2 :-
+    write('Can Tweety fly? '), flies(tweety), write('Yes.'), nl.
+
+query3 :-
+    write('Is a penguin a bird? '), bird(penguin), write('Yes.'), nl.
+
+query4 :-
+    write('Can a penguin fly? '), flies(penguin), write('No.'), nl.
+
+% Example usage
+:- dynamic bird/1. % To allow dynamic facts
+
+% Execute queries
+query1.
+query2.
+query3.
+query4.
+
+% Execute forward chaining
+forward_chain.
